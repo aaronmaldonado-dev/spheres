@@ -1,23 +1,15 @@
-import * as Tone from "tone";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+
+import { Sphere } from "./components/Sphere";
+import { mappedCmajorScale } from "./constants/mappedCmajorScale";
+import { createLeadSynth } from "./utils/createLeadSynth";
 
 import "normalize.css";
 import styles from "./App.module.css";
 
-const mappedCmajorScale = [
-  { key: "A", note: "C5" },
-  { key: "S", note: "D5" },
-  { key: "D", note: "E5" },
-  { key: "F", note: "F5" },
-  { key: "G", note: "G5" },
-  { key: "H", note: "A5" },
-  { key: "J", note: "B5" }
-];
-
-const synth = new Tone.Synth().toDestination();
-
-const playNote = (note) => {
-  synth.triggerAttackRelease(note, "8n");
-};
+const { playNote } = createLeadSynth();
 
 export default function App() {
   const getNote = (key) => {
@@ -31,6 +23,16 @@ export default function App() {
   };
 
   return (
-    <div className={styles.app} tabIndex="0" onKeyDown={onKeyDownHandler}></div>
+    <div className={styles.app} tabIndex="0" onKeyDown={onKeyDownHandler}>
+      <Canvas>
+        <color attach="background" args={["#202040"]} />
+        <ambientLight intensity={0.5} />
+        <Suspense fallback={null}>
+          <Sphere playNote={playNote} />
+          <Environment preset="sunset" />
+        </Suspense>
+        <OrbitControls enablePan={false} />
+      </Canvas>
+    </div>
   );
 }
