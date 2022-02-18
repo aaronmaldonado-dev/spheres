@@ -6,9 +6,11 @@ import {
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 
-import { Sphere } from "./components/Sphere";
-import { mappedCmajorScale } from "./constants/mappedCmajorScale";
 import { createLeadSynth } from "./utils/createLeadSynth";
+import { mappedCmajorScale } from "./constants/mappedCmajorScale";
+
+import { Sphere } from "./components/Sphere";
+import { DroneSynth } from "./components/DroneSynth";
 
 import "normalize.css";
 import styles from "./App.module.css";
@@ -28,6 +30,7 @@ export default function App() {
 
   return (
     <div className={styles.app} onKeyDown={onKeyDownHandler} tabIndex="0">
+      <DroneSynth />
       <Canvas>
         <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={50} />
         <color attach="background" args={["#202040"]} />

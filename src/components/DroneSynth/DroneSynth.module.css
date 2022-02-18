@@ -1,0 +1,14 @@
+.btn {
+  cursor: pointer;
+  color: #fafafa;
+  font-weight: 300;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid #fafafa;
+  padding: 0.5rem 0.75rem 0.75rem;
+  position: absolute;
+  min-width: 7rem;
+  z-index: 1000;
+  left: 1rem;
+  top: 1rem;
+}
