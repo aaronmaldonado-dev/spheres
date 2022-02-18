@@ -1,4 +1,8 @@
-import { OrbitControls, Environment } from "@react-three/drei";
+import {
+  OrbitControls,
+  Environment,
+  OrthographicCamera
+} from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 
@@ -23,15 +27,25 @@ export default function App() {
   };
 
   return (
-    <div className={styles.app} tabIndex="0" onKeyDown={onKeyDownHandler}>
+    <div className={styles.app} onKeyDown={onKeyDownHandler} tabIndex="0">
       <Canvas>
+        <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={50} />
         <color attach="background" args={["#202040"]} />
         <ambientLight intensity={0.5} />
         <Suspense fallback={null}>
-          <Sphere playNote={playNote} />
+          {mappedCmajorScale.map((mappedNote) => {
+            return (
+              <Sphere
+                color={mappedNote.color}
+                key={mappedNote.key}
+                note={mappedNote.note}
+                playNote={playNote}
+              />
+            );
+          })}
           <Environment preset="sunset" />
         </Suspense>
-        <OrbitControls enablePan={false} />
+        <OrbitControls enablePan={false} enableZoom={false} autoRotate={true} />
       </Canvas>
     </div>
   );
