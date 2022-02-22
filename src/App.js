@@ -1,8 +1,4 @@
-import {
-  OrbitControls,
-  Environment,
-  OrthographicCamera
-} from "@react-three/drei";
+import { OrbitControls, Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
 import chroma from "chroma-js";
@@ -46,10 +42,24 @@ export default function App() {
       tabIndex="0"
     >
       <Instructions />
-      <Canvas>
-        <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={50} />
+      <Canvas
+        shadows
+        camera={{ position: [0, 0, 40], fov: 30, near: 1, far: 60 }}
+      >
         <color attach="background" args={["#202040"]} />
-        <ambientLight intensity={0.05} />
+        <ambientLight intensity={0.1} />
+        <spotLight
+          angle={0.25}
+          penumbra={1}
+          intensity={1.25}
+          position={[30, 30, 30]}
+        />
+        <directionalLight
+          intensity={4}
+          color="purple"
+          position={[-20, 20, 220]}
+        />
+
         <Suspense fallback={null}>
           {mappedCmajorScale.map((mappedNote, index) => {
             return (
@@ -62,7 +72,7 @@ export default function App() {
               />
             );
           })}
-          <Environment preset="sunset" />
+          <Environment preset="warehouse" />
         </Suspense>
         <OrbitControls enablePan={false} enableZoom={false} autoRotate={true} />
       </Canvas>

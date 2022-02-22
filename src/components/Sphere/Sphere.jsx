@@ -79,7 +79,11 @@ export const Sphere = ({ color, note, playNote, pressedNote }) => {
       scale={sphereProps.scale}
     >
       <sphereGeometry />
-      <meshStandardMaterial color={color} />
+      <meshStandardMaterial
+        color={color}
+        roughness={0.15}
+        envMapIntensity={0.4}
+      />
     </mesh>
   );
 };
