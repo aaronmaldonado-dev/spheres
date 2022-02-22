@@ -11,7 +11,7 @@ import { createLeadSynth } from "./utils/createLeadSynth";
 import { mappedCmajorScale } from "./constants/mappedCmajorScale";
 
 import { Sphere } from "./components/Sphere";
-// import { DroneSynth } from "./components/DroneSynth";
+import { Instructions } from "./components/Instructions";
 
 import "normalize.css";
 import styles from "./App.module.css";
@@ -45,7 +45,7 @@ export default function App() {
       onKeyUp={onKeyUpHandler}
       tabIndex="0"
     >
-      {/* <DroneSynth /> */}
+      <Instructions />
       <Canvas>
         <OrthographicCamera makeDefault position={[0, 0, 10]} zoom={50} />
         <color attach="background" args={["#202040"]} />

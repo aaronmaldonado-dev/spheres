@@ -1,0 +1,15 @@
+.wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  left: calc(20% - 1rem);
+  border-radius: 6px;
+  text-align: center;
+  color: #dfdfdf;
+  padding: 1rem;
+  height: auto;
+  font-size: 0.875rem;
+  position: absolute;
+  font-weight: 300;
+  z-index: 5000;
+  bottom: 1rem;
+  width: 60%;
+}
