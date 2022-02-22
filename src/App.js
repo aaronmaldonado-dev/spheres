@@ -5,6 +5,7 @@ import {
 } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
+import chroma from "chroma-js";
 
 import { createLeadSynth } from "./utils/createLeadSynth";
 import { mappedCmajorScale } from "./constants/mappedCmajorScale";
@@ -18,6 +19,9 @@ import styles from "./App.module.css";
 const { playNote } = createLeadSynth();
 
 export default function App() {
+  const [colors] = useState(() => {
+    return chroma.scale("Spectral").colors(mappedCmajorScale.length);
+  });
   const [pressedNote, setPressedNote] = useState(null);
 
   const getNote = (key) => {
@@ -47,10 +51,10 @@ export default function App() {
         <color attach="background" args={["#202040"]} />
         <ambientLight intensity={0.05} />
         <Suspense fallback={null}>
-          {mappedCmajorScale.map((mappedNote) => {
+          {mappedCmajorScale.map((mappedNote, index) => {
             return (
               <Sphere
-                color={mappedNote.color}
+                color={colors[index]}
                 key={mappedNote.key}
                 note={mappedNote.note}
                 playNote={playNote}

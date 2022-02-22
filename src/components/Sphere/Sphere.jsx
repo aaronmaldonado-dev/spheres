@@ -20,9 +20,9 @@ gsap.registerEffect({
         duration: 0.25,
         yoyo: true,
         repeat: 1,
-        x: config.scale,
-        y: config.scale,
-        z: config.scale
+        x: config.scaleFactor * config.sphereProps.scale,
+        y: config.scaleFactor * config.sphereProps.scale,
+        z: config.scaleFactor * config.sphereProps.scale
       }
     );
   },
@@ -34,11 +34,11 @@ export const Sphere = ({ color, note, playNote, pressedNote }) => {
   const [sphereTimeline, setSphereTimeline] = useState(null);
   const [sphereProps] = useState({
     position: [
-      getRandomArbitrary(-2.75, 2.75),
-      getRandomArbitrary(-2.75, 2.75),
-      getRandomArbitrary(-2.75, 2.75)
+      getRandomArbitrary(-6, 6),
+      getRandomArbitrary(-6, 6),
+      getRandomArbitrary(-6, 6)
     ],
-    scale: getRandomArbitrary(0.5, 1.15)
+    scale: getRandomArbitrary(0.5, 1.5)
   });
   const mesh = useRef();
 
@@ -61,11 +61,11 @@ export const Sphere = ({ color, note, playNote, pressedNote }) => {
   useEffect(() => {
     setSphereTimeline(() => {
       const tl = gsap.timeline({ paused: true });
-      const scale = getRandomArbitrary(1.25, 2);
+      const scaleFactor = getRandomArbitrary(1.25, 2);
 
       tl.sphereScaleAnimation(mesh.current?.scale, {
         sphereProps,
-        scale
+        scaleFactor
       });
       return tl;
     });
